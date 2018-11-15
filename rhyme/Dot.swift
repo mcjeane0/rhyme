@@ -8,15 +8,43 @@
 
 import UIKit
 import CoreData
+import AVKit
+import Speech
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class Dot: UIResponder, UIApplicationDelegate {
 
+    /// The instance of `URLSession` that is going to be used for making network calls.
+    lazy var urlSession: URLSession = {
+        // Configure the `URLSession` instance that is going to be used for making network calls.
+        let urlSessionConfiguration = URLSessionConfiguration.default
+        
+        return URLSession(configuration: urlSessionConfiguration)
+    }()
+    
+    var speechRecognitionRequests : [SFSpeechRecognitionRequest] = []
+    var speechRecognitionResults : [SFSpeechRecognitionResult] = []
+    var speechRecognizer : SFSpeechRecognizer! = SFSpeechRecognizer(locale: Locale.current) ?? SFSpeechRecognizer(locale: Locale(identifier: "en-us"))
+    var speechRecognitionRecorder : AVAudioRecorder?
+    var face : Face!
     var window: UIWindow?
 
-
+    @objc func faceDidAppear(says notification:Notification){
+        if let face = notification.object as? Face {
+            self.face = face
+            self.face.delegate = self
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        NotificationCenter.default.addObserver(self, selector: #selector(faceDidAppear(says:)), name: Face.faceDidAppearNotification, object: nil)
+        
         return true
     }
 
