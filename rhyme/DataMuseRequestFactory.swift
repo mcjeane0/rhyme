@@ -22,7 +22,7 @@ struct DataMuseRequestFactory {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = DataMuseRequestFactory.dataMuseBaseURLString
-        urlComponents.path = exactRhymesFormat
+        urlComponents.path = "\(exactRhymesFormat)\(string)"
         var urlRequest = URLRequest(url: urlComponents.url!)
         urlRequest.httpMethod = "GET"
         
@@ -33,7 +33,7 @@ struct DataMuseRequestFactory {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = DataMuseRequestFactory.dataMuseBaseURLString
-        urlComponents.path = approximateRhymesFormat
+        urlComponents.path = "\(approximateRhymesFormat)\(string)"
         var urlRequest = URLRequest(url: urlComponents.url!)
         urlRequest.httpMethod = "GET"
         return urlRequest
