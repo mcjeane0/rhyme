@@ -19,6 +19,8 @@
 		FB9EF288219DCE8F00F99532 /* Ear.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EF287219DCE8F00F99532 /* Ear.swift */; };
 		FB9EF28A219E0C5700F99532 /* DataMuseRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EF289219E0C5700F99532 /* DataMuseRequestFactory.swift */; };
 		FB9EF28C219E27D800F99532 /* Antennae.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EF28B219E27D800F99532 /* Antennae.swift */; };
+		FB9EF28E219E340B00F99532 /* Mouth.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EF28D219E340B00F99532 /* Mouth.swift */; };
+		FB9EF290219E411600F99532 /* NucleusAccumbens.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9EF28F219E411600F99532 /* NucleusAccumbens.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		FB9EF287219DCE8F00F99532 /* Ear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ear.swift; sourceTree = "<group>"; };
 		FB9EF289219E0C5700F99532 /* DataMuseRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMuseRequestFactory.swift; sourceTree = "<group>"; };
 		FB9EF28B219E27D800F99532 /* Antennae.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Antennae.swift; sourceTree = "<group>"; };
+		FB9EF28D219E340B00F99532 /* Mouth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouth.swift; sourceTree = "<group>"; };
+		FB9EF28F219E411600F99532 /* NucleusAccumbens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NucleusAccumbens.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,10 +113,12 @@
 			children = (
 				FB9EF252219DC79000F99532 /* Dot.swift */,
 				FB9EF287219DCE8F00F99532 /* Ear.swift */,
+				FB9EF28D219E340B00F99532 /* Mouth.swift */,
 				FB9EF289219E0C5700F99532 /* DataMuseRequestFactory.swift */,
 				FB9EF28B219E27D800F99532 /* Antennae.swift */,
 				FB9EF285219DCB6900F99532 /* Head.swift */,
 				FB9EF254219DC79000F99532 /* Face.swift */,
+				FB9EF28F219E411600F99532 /* NucleusAccumbens.swift */,
 				FB9EF256219DC79000F99532 /* Main.storyboard */,
 				FB9EF25C219DC79200F99532 /* Assets.xcassets */,
 				FB9EF25E219DC79200F99532 /* LaunchScreen.storyboard */,
@@ -313,10 +319,12 @@
 				FB9EF288219DCE8F00F99532 /* Ear.swift in Sources */,
 				FB9EF255219DC79000F99532 /* Face.swift in Sources */,
 				FB9EF28C219E27D800F99532 /* Antennae.swift in Sources */,
+				FB9EF28E219E340B00F99532 /* Mouth.swift in Sources */,
 				FB9EF28A219E0C5700F99532 /* DataMuseRequestFactory.swift in Sources */,
 				FB9EF25B219DC79000F99532 /* rhyme.xcdatamodeld in Sources */,
 				FB9EF253219DC79000F99532 /* Dot.swift in Sources */,
 				FB9EF286219DCB6900F99532 /* Head.swift in Sources */,
+				FB9EF290219E411600F99532 /* NucleusAccumbens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

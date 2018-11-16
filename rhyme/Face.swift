@@ -17,6 +17,12 @@ protocol FaceDelegate {
     
     func handleTap()
     
+    func handleSwipeLeft()
+    
+    func handleSwipeRight()
+    
+    func handleSwipeDown()
+    
 }
 
 class Face: UIViewController {
@@ -24,6 +30,9 @@ class Face: UIViewController {
     var delegate : FaceDelegate?
     var tap : UITapGestureRecognizer!
     var press : UILongPressGestureRecognizer!
+    var swipeLeft : UISwipeGestureRecognizer!
+    var swipeRight : UISwipeGestureRecognizer!
+    var swipeDown : UISwipeGestureRecognizer!
     
     static let faceDidAppearNotification = Notification.Name(rawValue: "FaceDidAppearNotification")
     @IBOutlet weak var stateLabel: UILabel!
@@ -31,11 +40,15 @@ class Face: UIViewController {
     func enableGestures(){
         enableTap()
         enablePress()
+        enableSwipeLeft()
+        enableSwipeRight()
     }
     
     func disableGestures(){
         disableTap()
         disablePress()
+        disableSwipeLeft()
+        disableSwipeRight()
     }
     
     func enableTap(){
@@ -53,6 +66,54 @@ class Face: UIViewController {
     func disablePress(){
         press.isEnabled = false
     }
+    
+    func enableSwipeLeft(){
+        swipeLeft.isEnabled = true
+    }
+    
+    func enableSwipeRight(){
+        swipeRight.isEnabled = true
+    }
+    
+    func disableSwipeLeft(){
+        swipeLeft.isEnabled = false
+    }
+    
+    func disableSwipeRight(){
+        swipeRight.isEnabled = false
+    }
+    
+    @objc func handleSwipeDown(_ gestureRecognizer:UISwipeGestureRecognizer){
+        switch gestureRecognizer.state {
+        case .ended:
+            delegate?.handleSwipeDown()
+            break
+        default:
+            break
+        }
+        
+    }
+    
+    @objc func handleSwipeRight(_ gestureRecognizer:UISwipeGestureRecognizer){
+        switch gestureRecognizer.state {
+        case .ended:
+            delegate?.handleSwipeRight()
+            break
+        default:
+            break
+        }
+    }
+    
+    @objc func handleSwipeLeft(_ gestureRecognizer:UISwipeGestureRecognizer){
+        switch gestureRecognizer.state {
+        case .ended:
+            delegate?.handleSwipeLeft()
+            break
+        default:
+            break
+        }
+    }
+    
     @objc func handleTap(_ gestureRecognizer:UITapGestureRecognizer){
         switch gestureRecognizer.state {
         case .ended:
@@ -96,8 +157,23 @@ class Face: UIViewController {
         tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         press = UILongPressGestureRecognizer(target: self, action: #selector(handlePress(_:)))
         press.minimumPressDuration = 0.2
+        
+        swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeLeft(_:)))
+        swipeLeft.direction = .left
+        
+        swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeRight(_:)))
+        swipeRight.direction = .right
+        
+        swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDown(_:)))
+        swipeDown.direction = .down
+        
         view.addGestureRecognizer(tap)
         view.addGestureRecognizer(press)
+        
+        view.addGestureRecognizer(swipeLeft)
+        view.addGestureRecognizer(swipeRight)
+        view.addGestureRecognizer(swipeDown)
+        
     }
 
 

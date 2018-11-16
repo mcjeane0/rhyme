@@ -19,6 +19,18 @@ func getDocumentsDirectory() -> URL {
 @UIApplicationMain
 class Dot: UIResponder, UIApplicationDelegate {
 
+    var store : IAPHandler = IAPHandler.shared
+
+    var speechSynthesisVoice : AVSpeechSynthesisVoice = AVSpeechSynthesisVoice(language: nil)!
+    
+    var currentRhymeIndex = 0
+    var possibleRhymes : [String] = [] {
+        didSet {
+            currentRhymeIndex = 0
+        }
+    }
+    var speechSynthesizer = AVSpeechSynthesizer()
+    var voiceImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.medium)
     /// The instance of `URLSession` that is going to be used for making network calls.
     lazy var urlSession: URLSession = {
         // Configure the `URLSession` instance that is going to be used for making network calls.
@@ -38,13 +50,17 @@ class Dot: UIResponder, UIApplicationDelegate {
         if let face = notification.object as? Face {
             self.face = face
             self.face.delegate = self
+            proposeRecordabilityAuthorization()
+            proposeSpeechRecognitionAuthorization()
         }
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         NotificationCenter.default.addObserver(self, selector: #selector(faceDidAppear(says:)), name: Face.faceDidAppearNotification, object: nil)
-        
+        configureAudioSession()
+        store.fetchAvailableProducts()
+        voiceImpactFeedbackGenerator.prepare()
         return true
     }
 

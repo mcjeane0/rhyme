@@ -49,7 +49,28 @@ extension Dot : AVAudioRecorderDelegate {
         let formattedString = result.bestTranscription.formattedString
         
         // Send string to web!!
-        
+        fetchExactRhymes(formattedString) { (possibleExactRhymes) in
+            if possibleExactRhymes.count > 0 {
+                
+                for exactRhyme in possibleExactRhymes {
+                    if var arrayOfUtteredRhymes = UserDefaults.standard.array(forKey: formattedString) as? [String] {
+                        if !arrayOfUtteredRhymes.contains(exactRhyme) {
+                            UserDefaults.standard.set(arrayOfUtteredRhymes.append(exactRhyme), forKey: formattedString)
+                            self.prepareToUtter(exactRhyme)
+                            return
+                        }
+                    }
+                    else {
+                        UserDefaults.standard.set([exactRhyme], forKey: formattedString)
+                        self.prepareToUtter(exactRhyme)
+                        return
+                    }
+                }
+            }
+            else {
+                
+            }
+        }
         
         
         
