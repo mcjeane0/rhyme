@@ -24,6 +24,7 @@ struct DataMuseRequestFactory {
         urlComponents.host = DataMuseRequestFactory.dataMuseBaseURLString
         urlComponents.path = "\(exactRhymesFormat)\(string)"
         var urlRequest = URLRequest(url: urlComponents.url!)
+        NSLog("\(urlComponents.url!)")
         urlRequest.httpMethod = "GET"
         
         return urlRequest
@@ -35,6 +36,7 @@ struct DataMuseRequestFactory {
         urlComponents.host = DataMuseRequestFactory.dataMuseBaseURLString
         urlComponents.path = "\(approximateRhymesFormat)\(string)"
         var urlRequest = URLRequest(url: urlComponents.url!)
+        NSLog("\(urlComponents.url!)")
         urlRequest.httpMethod = "GET"
         return urlRequest
     }
