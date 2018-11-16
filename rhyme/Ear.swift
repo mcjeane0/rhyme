@@ -54,13 +54,13 @@ extension Dot : AVAudioRecorderDelegate {
                     for exactRhyme in possibleExactRhymes {
                         if var arrayOfUtteredRhymes = UserDefaults.standard.array(forKey: formattedString) as? [String] {
                             if !arrayOfUtteredRhymes.contains(exactRhyme) {
-                                UserDefaults.standard.set(arrayOfUtteredRhymes.append(exactRhyme), forKey: formattedString)
+                                //UserDefaults.standard.set(arrayOfUtteredRhymes.append(exactRhyme), forKey: formattedString)
                                 self.prepareToUtter(exactRhyme)
                                 return
                             }
                         }
                         else {
-                            UserDefaults.standard.set([exactRhyme], forKey: formattedString)
+                            //UserDefaults.standard.set([exactRhyme], forKey: formattedString)
                             self.prepareToUtter(exactRhyme)
                             return
                         }
@@ -72,13 +72,13 @@ extension Dot : AVAudioRecorderDelegate {
                     for approximateRhyme in possibleApproximateRhymes {
                         if var arrayOfUtteredRhymes = UserDefaults.standard.array(forKey: formattedString) as? [String] {
                             if !arrayOfUtteredRhymes.contains(approximateRhyme) {
-                                UserDefaults.standard.set(arrayOfUtteredRhymes.append(approximateRhyme), forKey: formattedString)
+                                //UserDefaults.standard.set(arrayOfUtteredRhymes.append(approximateRhyme), forKey: formattedString)
                                 self.prepareToUtter(approximateRhyme)
                                 return
                             }
                         }
                         else {
-                            UserDefaults.standard.set([approximateRhyme], forKey: formattedString)
+                            //UserDefaults.standard.set([approximateRhyme], forKey: formattedString)
                             self.prepareToUtter(approximateRhyme)
                             return
                         }
