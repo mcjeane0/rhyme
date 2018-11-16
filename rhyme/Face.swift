@@ -37,6 +37,10 @@ class Face: UIViewController {
     static let faceDidAppearNotification = Notification.Name(rawValue: "FaceDidAppearNotification")
     @IBOutlet weak var stateLabel: UILabel!
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     func enableGestures(){
         enableTap()
         enablePress()

@@ -19,13 +19,13 @@
 	<key>CFBundleShortVersionString</key>
 	<string>0</string>
 	<key>CFBundleVersion</key>
-	<string>5</string>
+	<string>6</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>.rhyme uses microphones to recognize your voice. Turn on the microphone by pressing and holding the screen. Turn off the microphone by letting go of the screen.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>.walkie uses speech recognition to look up rhyming words for you.</string>
+	<string>.rhyme uses speech recognition to look up rhyming words for you.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

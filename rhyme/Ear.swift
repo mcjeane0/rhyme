@@ -135,6 +135,7 @@ extension Dot : AVAudioRecorderDelegate {
         case .denied:
             break
         case .granted:
+            addSpeechRecognitionRecorder()
             break
         case .undetermined:
             proposeRecordabilityAuthorization()
