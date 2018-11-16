@@ -132,9 +132,15 @@ class Face: UIViewController {
         switch gestureRecognizer.state {
         case .began:
             delegate?.handlePressBegan()
+            UIView.animate(withDuration: 0.2) {
+                self.view.backgroundColor = .white
+            }
             break
         case .ended,.cancelled:
             delegate?.handlePressEnded()
+            UIView.animate(withDuration: 0.2) {
+                self.view.backgroundColor = .black
+            }
             break
         default:
             break
