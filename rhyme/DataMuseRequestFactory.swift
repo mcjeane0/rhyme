@@ -18,16 +18,17 @@ struct DataMuseRequestFactory {
     
     static let wordsFormat = "/words"
     
-    static let exactRhymesFormat = "rel_rhy="
+    static let exactRhymesFormat = "rel_rhy"
     
-    static let approximateRhymesFormat = "rel_nry="
+    static let approximateRhymesFormat = "rel_nry"
     
     static func createExactRhymesRequest(_ string:String)->URLRequest {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = DataMuseRequestFactory.dataMuseBaseURLString
         urlComponents.path = wordsFormat
-        urlComponents.query = "\(exactRhymesFormat)\(string)"
+        let exactRhymeQueryItem = URLQueryItem(name: exactRhymesFormat, value: string)
+        urlComponents.queryItems = [exactRhymeQueryItem]
         var urlRequest = URLRequest(url: urlComponents.url!)
         NSLog("\(urlComponents.url!)")
         urlRequest.httpMethod = "GET"
@@ -40,7 +41,8 @@ struct DataMuseRequestFactory {
         urlComponents.scheme = "https"
         urlComponents.host = DataMuseRequestFactory.dataMuseBaseURLString
         urlComponents.path = wordsFormat
-        urlComponents.query = "\(approximateRhymesFormat)\(string)"
+        let approximateRhymeQueryItem = URLQueryItem(name: approximateRhymesFormat, value: string)
+        urlComponents.queryItems = [approximateRhymeQueryItem]
         var urlRequest = URLRequest(url: urlComponents.url!)
         NSLog("\(urlComponents.url!)")
         urlRequest.httpMethod = "GET"
