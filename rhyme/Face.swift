@@ -121,7 +121,28 @@ class Face: UIViewController {
     @objc func handleTap(_ gestureRecognizer:UITapGestureRecognizer){
         switch gestureRecognizer.state {
         case .ended:
-            delegate?.handleTap()
+            let moneyAlert = UIAlertController(title: "Would you like to tip the developer a dollar ($1.00)?", message: "Your tip directly supports software development of .rhyme", preferredStyle: UIAlertController.Style.alert)
+            let yesMoney = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default) { (action) in
+                // MARK: present purchase
+                self.delegate?.handleTap()
+            }
+            let noMoney = UIAlertAction(title: "No", style: UIAlertAction.Style.cancel) { (action) in
+                // MARK: Disappear
+            }
+            
+            moneyAlert.addAction(yesMoney)
+            moneyAlert.addAction(noMoney)
+            
+            self.present(moneyAlert, animated: true) {
+                NSLog("moneyAlertPresented")
+            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 60.0) {
+                if moneyAlert.isBeingPresented {
+                    moneyAlert.dismiss(animated: true, completion: {
+                        NSLog("moneyAlertDismissed")
+                    })
+                }
+            }
             break
         default:
             break

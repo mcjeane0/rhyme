@@ -60,7 +60,7 @@ extension Dot : AVAudioRecorderDelegate {
                             }
                         }
                         else {
-                            //UserDefaults.standard.set([exactRhyme], forKey: formattedString)
+                            //UserDefaults.stan`dard.set([exactRhyme], forKey: formattedString)
                             self.prepareToUtter(exactRhyme)
                             return
                         }
