@@ -14,9 +14,9 @@ struct DataMuseRequestFactory {
     
     static let dataMuseBaseURLString = "api.datamuse.com"
     
-    static let exactRhymesFormat = "/words?/rel_rhy="
+    static let exactRhymesFormat = "/words?rel_rhy="
     
-    static let approximateRhymesFormat = "/words?/rel_nry="
+    static let approximateRhymesFormat = "/words?rel_nry="
     
     static func createExactRhymesRequest(_ string:String)->URLRequest {
         var urlComponents = URLComponents()
