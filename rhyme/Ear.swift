@@ -42,34 +42,67 @@ extension Dot : AVAudioRecorderDelegate {
                 (average + (nextValue/Float(segmentsCount)))
             })
         NSLog("result.bestTranscription.segments.confidence:\(averageConfidenceOfBestTranscription)")
-        let allResultsTranscriptions = speechRecognitionResults.map { (result) -> String in
-            return result.bestTranscription.formattedString
-        }
         
         let formattedString = result.bestTranscription.formattedString
-        
+        self.playerUtteranceFormattedString = formattedString
         // Send string to web!!
         fetchExactRhymes(formattedString) { (possibleExactRhymes) in
-            if possibleExactRhymes.count > 0 {
-                
-                for exactRhyme in possibleExactRhymes {
-                    if var arrayOfUtteredRhymes = UserDefaults.standard.array(forKey: formattedString) as? [String] {
-                        if !arrayOfUtteredRhymes.contains(exactRhyme) {
-                            UserDefaults.standard.set(arrayOfUtteredRhymes.append(exactRhyme), forKey: formattedString)
+            self.fetchApproximateRhymes(formattedString, completion: { (possibleApproximateRhymes) in
+                self.possibleRhymes = []
+                if possibleExactRhymes.count > 0 {
+                    self.possibleRhymes.append(contentsOf:possibleExactRhymes)
+                    for exactRhyme in possibleExactRhymes {
+                        if var arrayOfUtteredRhymes = UserDefaults.standard.array(forKey: formattedString) as? [String] {
+                            if !arrayOfUtteredRhymes.contains(exactRhyme) {
+                                UserDefaults.standard.set(arrayOfUtteredRhymes.append(exactRhyme), forKey: formattedString)
+                                self.prepareToUtter(exactRhyme)
+                                return
+                            }
+                        }
+                        else {
+                            UserDefaults.standard.set([exactRhyme], forKey: formattedString)
                             self.prepareToUtter(exactRhyme)
                             return
                         }
                     }
-                    else {
-                        UserDefaults.standard.set([exactRhyme], forKey: formattedString)
-                        self.prepareToUtter(exactRhyme)
-                        return
+                    
+                }
+                if possibleApproximateRhymes.count > 0 {
+                    self.possibleRhymes.append(contentsOf:possibleApproximateRhymes)
+                    for approximateRhyme in possibleApproximateRhymes {
+                        if var arrayOfUtteredRhymes = UserDefaults.standard.array(forKey: formattedString) as? [String] {
+                            if !arrayOfUtteredRhymes.contains(approximateRhyme) {
+                                UserDefaults.standard.set(arrayOfUtteredRhymes.append(approximateRhyme), forKey: formattedString)
+                                self.prepareToUtter(approximateRhyme)
+                                return
+                            }
+                        }
+                        else {
+                            UserDefaults.standard.set([approximateRhyme], forKey: formattedString)
+                            self.prepareToUtter(approximateRhyme)
+                            return
+                        }
                     }
                 }
-            }
-            else {
                 
-            }
+                if self.possibleRhymes.count > 0 {
+                    self.prepareToUtter(self.possibleRhymes[self.currentRhymeIndex])
+                }
+                else{
+                    // MARK: look up phrase in user defaults and repeat a known rhyme...
+                    if var arrayOfUtteredRhymes = UserDefaults.standard.array(forKey: formattedString) as? [String] {
+                        self.currentRhymeIndex = 0
+                        self.possibleRhymes = arrayOfUtteredRhymes
+                        self.prepareToUtter(self.possibleRhymes[self.currentRhymeIndex])
+                    }
+                    else {
+                        // MARK: make up a fake word that doesn't really exist but definitely rhymes
+                        
+                    }
+                    
+                }
+            })
+            
         }
         
         

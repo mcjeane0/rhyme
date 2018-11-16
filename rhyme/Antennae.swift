@@ -39,5 +39,32 @@ extension Dot {
         
     }
     
+    func fetchApproximateRhymes(_ string:String, completion: @escaping ([String])->()){
+        
+        let urlRequest = DataMuseRequestFactory.createApproximateRhymesRequest(string)
+        
+        let dataTask = urlSession.dataTask(with: urlRequest) { (data, response, responseError) in
+            guard responseError == nil, let urlResponse = response as? HTTPURLResponse, urlResponse.statusCode == 200 else {
+                completion([])
+                return
+            }
+            do {
+                if let jsonArray = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String:Any]] {
+                    let wordArray = jsonArray.map({ (datamuseRhymeEntry) -> String in
+                        return datamuseRhymeEntry["word"] as! String
+                    })
+                    completion(wordArray)
+                }
+            }
+            catch{
+                NSLog("catch:error:\(error)")
+            }
+            
+        }
+        
+        dataTask.resume()
+        
+    }
+    
     
 }

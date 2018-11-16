@@ -29,6 +29,7 @@ class Dot: UIResponder, UIApplicationDelegate {
             currentRhymeIndex = 0
         }
     }
+    var playerUtteranceFormattedString : String = ""
     var speechSynthesizer = AVSpeechSynthesizer()
     var voiceImpactFeedbackGenerator = UIImpactFeedbackGenerator(style: UIImpactFeedbackGenerator.FeedbackStyle.medium)
     /// The instance of `URLSession` that is going to be used for making network calls.

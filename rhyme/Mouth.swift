@@ -32,6 +32,7 @@ extension Dot : AVSpeechSynthesizerDelegate {
         voiceImpactFeedbackGenerator.prepare()
         let utterance = AVSpeechUtterance(string: string)
         utterance.voice = self.speechSynthesisVoice
+        face.dispatchDotState(string)
         speechSynthesizer.speak(utterance)
         
     }
