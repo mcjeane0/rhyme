@@ -44,7 +44,8 @@ extension Dot {
         let urlRequest = DataMuseRequestFactory.createApproximateRhymesRequest(string)
         
         let dataTask = urlSession.dataTask(with: urlRequest) { (data, response, responseError) in
-            guard responseError == nil, let urlResponse = response as? HTTPURLResponse else {
+            guard responseError == nil, let urlResponse = response as? HTTPURLResponse, urlResponse.statusCode == 200 else {
+                NSLog("urlResponse.statusCode:\(urlResponse.statusCode)")
                 completion([])
                 return
             }
